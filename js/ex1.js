@@ -34,3 +34,39 @@ const houses = [
     }
   };
   
+// Add in <option> tag
+const OptionTag = (text, value) => {
+    const element = document.createElement("option");
+    element.extContent = text;
+    element.value = value;
+    return element;
+  };
+  
+  // Add in <li> tag
+  const addLiElement = text => {
+    const element = document.createElement("li");
+    element.textContent = text;
+    return element;
+  };
+  
+  const HouseElement = document.querySelector("select");
+  
+  // Fill in the info of house list
+  houses.forEach(house => {
+    HouseElement.appendChild(OptionTag(house.name, house.code));
+  });
+  
+  // Change the house
+  HouseElement.addEventListener("change", e => {
+   
+    const characters = getCharacters(e.target.value);
+    const CharacterElement = document.getElementById("characters");
+
+    // Empty the list
+    CharacterElement.innerHTML = "";
+
+    // Show complete list
+    characters.forEach(character => {
+      CharacterElement.appendChild(addLiElement(character));
+    });
+  });
